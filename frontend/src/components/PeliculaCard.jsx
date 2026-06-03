@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import { useCarrito } from '../context/CarritoContext'
 
 const PH = 'https://placehold.co/400x560/1e1b4b/a78bfa?text=Sin+imagen'
@@ -24,7 +24,7 @@ export default function PeliculaCard({ pelicula }) {
         <Link to={`/pelicula/${pelicula.id}`}>
           <h3 className="text-white font-bold text-base hover:text-violet-400 transition-colors line-clamp-1">{pelicula.titulo}</h3>
         </Link>
-        <p className="text-gray-500 text-sm mt-1">{pelicula.director} � {pelicula.anio}</p>
+        <p className="text-gray-500 text-sm mt-1">{pelicula.director} · {pelicula.anio}</p>
 
         <div className="mt-4 flex gap-2">
           <Link to={`/pelicula/${pelicula.id}`} className="flex-1 text-center btn-secondary text-sm py-2">Ver detalle</Link>
@@ -39,3 +39,4 @@ export default function PeliculaCard({ pelicula }) {
     </div>
   )
 }
+
