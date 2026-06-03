@@ -5,9 +5,9 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-key')
-DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*').split(',')
+SECRET_KEY = config('SECRET_KEY', default='django-insecure-8f8Kk1.92sV8L8nRjw4aeYbXgZofF6uNCtT3sHqA1MgP5wV1k')
+DEBUG = config('DEBUG', default=False, cast=bool)
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='examen03-peliculas.onrender.com,localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
     'unfold',
@@ -111,8 +111,3 @@ UNFOLD = {
     'SITE_URL': '/',
     'SITE_ICON': None,
 }
-
-# FORZAR SECRET_KEY si está vacía
-import os
-if not SECRET_KEY:
-    SECRET_KEY = 'django-insecure-8f8Kk1.92sV8L8nRjw4aeYbXgZofF6uNCtT3sHqA1MgP5wV1k'
