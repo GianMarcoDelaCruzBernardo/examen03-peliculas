@@ -1,0 +1,13 @@
+﻿services:
+  - type: web
+    name: examen03-peliculas
+    runtime: python
+    buildCommand: pip install -r requirements.txt && python manage.py migrate --noinput && python manage.py collectstatic --noinput
+    startCommand: gunicorn gestion.wsgi:application
+    envVars:
+      - key: DEBUG
+        value: False
+      - key: SECRET_KEY
+        value: 8f8Kk1.92sV8L8nRjw4aeYbXgZofF6uNCtT3sHqA1MgP5wV1k
+      - key: ALLOWED_HOSTS
+        value: examen03-peliculas.onrender.com,localhost,127.0.0.1
