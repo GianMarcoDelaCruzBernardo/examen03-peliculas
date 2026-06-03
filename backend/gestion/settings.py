@@ -1,34 +1,54 @@
 from pathlib import Path
 from decouple import config
 import dj_database_url
-import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# ─────────────────────────────────────────────
+# CORE
+# ─────────────────────────────────────────────
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-dev-key')
-DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1').split(',')
+DEBUG = config('DEBUG', default=False, cast=bool)
 
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS',
+    default='localhost,127.0.0.1'
+).split(',')
+
+# ─────────────────────────────────────────────
+# APPS
+# ─────────────────────────────────────────────
 INSTALLED_APPS = [
     'unfold',
     'unfold.contrib.filters',
     'unfold.contrib.forms',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'corsheaders',
+
+    'cloudinary',
+    'cloudinary_storage',
+
     'tienda',
 ]
 
+# ─────────────────────────────────────────────
+# MIDDLEWARE
+# ─────────────────────────────────────────────
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -38,6 +58,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'gestion.urls'
 
+# ─────────────────────────────────────────────
+# TEMPLATES
+# ─────────────────────────────────────────────
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -56,6 +79,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gestion.wsgi.application'
 
+# ─────────────────────────────────────────────
+# DATABASE
+# ─────────────────────────────────────────────
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
@@ -63,6 +89,9 @@ DATABASES = {
     )
 }
 
+# ─────────────────────────────────────────────
+# SECURITY
+# ─────────────────────────────────────────────
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -70,22 +99,36 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# ─────────────────────────────────────────────
+# INTERNATIONALIZATION
+# ─────────────────────────────────────────────
 LANGUAGE_CODE = 'es-pe'
 TIME_ZONE = 'America/Lima'
 USE_I18N = True
 USE_TZ = True
 
+# ─────────────────────────────────────────────
+# STATIC FILES
+# ─────────────────────────────────────────────
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# ─────────────────────────────────────────────
+# MEDIA (Cloudinary)
+# ─────────────────────────────────────────────
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+# ─────────────────────────────────────────────
+# DEFAULT AUTO FIELD
+# ─────────────────────────────────────────────
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ── REST Framework ──────────────────────────────────────────
+# ─────────────────────────────────────────────
+# REST FRAMEWORK
+# ─────────────────────────────────────────────
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
@@ -97,14 +140,28 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 20,
 }
 
-# ── CORS ────────────────────────────────────────────────────
+# ─────────────────────────────────────────────
+# CORS
+# ─────────────────────────────────────────────
 CORS_ALLOWED_ORIGINS = config(
     'CORS_ALLOWED_ORIGINS',
     default='http://localhost:5173'
 ).split(',')
+
 CORS_ALLOW_CREDENTIALS = True
 
-# ── Unfold Admin ────────────────────────────────────────────
+# ─────────────────────────────────────────────
+# CLOUDINARY CONFIG
+# ─────────────────────────────────────────────
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+
+# ─────────────────────────────────────────────
+# UNFOLD ADMIN
+# ─────────────────────────────────────────────
 UNFOLD = {
     'SITE_TITLE': 'Examen03 Admin',
     'SITE_HEADER': 'Panel de Administración',
