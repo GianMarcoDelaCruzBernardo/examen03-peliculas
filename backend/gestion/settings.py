@@ -111,3 +111,8 @@ UNFOLD = {
     'SITE_URL': '/',
     'SITE_ICON': None,
 }
+
+# FORZAR SECRET_KEY si está vacía
+import os
+if not SECRET_KEY:
+    SECRET_KEY = 'django-insecure-8f8Kk1.92sV8L8nRjw4aeYbXgZofF6uNCtT3sHqA1MgP5wV1k'
