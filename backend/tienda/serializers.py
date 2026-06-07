@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Genero, Pelicula, Pedido
+import cloudinary
 
 
 class GeneroSerializer(serializers.ModelSerializer):
@@ -19,7 +20,7 @@ class PeliculaSerializer(serializers.ModelSerializer):
 
     def get_imagen_url(self, obj):
         if obj.imagen:
-            return obj.imagen.url  # funciona igual con CloudinaryField
+            return cloudinary.CloudinaryImage(str(obj.imagen)).build_url()
         return None
 
 
