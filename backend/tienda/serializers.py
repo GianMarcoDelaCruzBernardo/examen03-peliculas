@@ -19,7 +19,7 @@ class PeliculaSerializer(serializers.ModelSerializer):
 
     def get_imagen_url(self, obj):
         if obj.imagen:
-            return obj.imagen.url  # Cloudinary ya devuelve la URL completa
+            return obj.imagen.url  # funciona igual con CloudinaryField
         return None
 
 

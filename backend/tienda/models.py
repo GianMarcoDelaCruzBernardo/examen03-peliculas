@@ -1,5 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
+import cloudinary
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class Genero(models.Model):
@@ -19,7 +21,7 @@ class Pelicula(models.Model):
     titulo         = models.CharField(max_length=200)
     director       = models.CharField(max_length=150)
     anio           = models.PositiveIntegerField()
-    imagen         = models.ImageField(upload_to='peliculas/', blank=True, null=True)
+    imagen         = CloudinaryField('imagen', folder='peliculas', blank=True, null=True)  # ← CAMBIO
     genero         = models.ForeignKey(
                          Genero,
                          on_delete=models.SET_NULL,
