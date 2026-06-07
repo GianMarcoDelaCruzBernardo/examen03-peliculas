@@ -18,9 +18,8 @@ class PeliculaSerializer(serializers.ModelSerializer):
                   'genero', 'genero_nombre', 'fecha_creacion']
 
     def get_imagen_url(self, obj):
-        request = self.context.get('request')
-        if obj.imagen and request:
-            return request.build_absolute_uri(obj.imagen.url)
+        if obj.imagen:
+            return obj.imagen.url  # Cloudinary ya devuelve la URL completa
         return None
 
 
