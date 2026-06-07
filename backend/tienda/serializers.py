@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Genero, Pelicula, Pedido
-import cloudinary
+from django.conf import settings
 
 
 class GeneroSerializer(serializers.ModelSerializer):
@@ -20,7 +20,9 @@ class PeliculaSerializer(serializers.ModelSerializer):
 
     def get_imagen_url(self, obj):
         if obj.imagen:
-            return cloudinary.CloudinaryImage(str(obj.imagen)).build_url()
+            cloud_name = settings.CLOUDINARY_STORAGE['CLOUD_NAME']
+            public_id  = str(obj.imagen)
+            return f'https://res.cloudinary.com/{cloud_name}/image/upload/{public_id}'
         return None
 
 
