@@ -22,7 +22,9 @@ class PeliculaSerializer(serializers.ModelSerializer):
         if obj.imagen:
             cloud_name = settings.CLOUDINARY_STORAGE['CLOUD_NAME']
             public_id  = str(obj.imagen)
-            return f'https://res.cloudinary.com/{cloud_name}/image/upload/{public_id}'
+            if '.' in public_id.split('/')[-1]:
+                return f'https://res.cloudinary.com/{cloud_name}/image/upload/{public_id}'
+            return f'https://res.cloudinary.com/{cloud_name}/image/upload/{public_id}.jpg'
         return None
 
 
