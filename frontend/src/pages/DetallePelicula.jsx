@@ -28,7 +28,7 @@ export default function DetallePelicula() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="rounded-2xl overflow-hidden border border-gray-800 aspect-[2/3]">
           <img
-            src={pelicula.imagen_url || pelicula.imagen || PH}
+            src={pelicula.imagen_url || PH}
             alt={pelicula.titulo}
             className="w-full h-full object-cover"
             onError={e => { e.target.src = PH }}

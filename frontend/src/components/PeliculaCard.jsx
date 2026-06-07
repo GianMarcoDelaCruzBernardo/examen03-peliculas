@@ -9,7 +9,7 @@ export default function PeliculaCard({ pelicula }) {
     <div className="card group flex flex-col">
       <Link to={`/pelicula/${pelicula.id}`} className="relative overflow-hidden aspect-[2/3]">
         <img
-          src={pelicula.imagen_url || pelicula.imagen || PH}
+          src={pelicula.imagen_url || PH}
           alt={pelicula.titulo}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           onError={e => { e.target.src = PH }}
